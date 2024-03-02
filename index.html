@@ -1,22 +1,63 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Tarefas</title>
-    <link rel="stylesheet" href="./src/css/todo-app.css">
-</head>
-<body>
-    <div class="container">
-        <h1>Lista de Tarefas</h1>
-        <div class="input-container">
-            <input type="text" id="taskInput" placeholder="Adicione uma nova Tarefa">
-            <button onclick="addTask()">CRIAR</button>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Lista de Tarefas</title>
+        <link rel="stylesheet" href="./src/css/todo-app.css" />
+    </head>
+    <body>
+        <!-- Início Menu -->
+        <aside class="menu white-bg">
+            <div class="main-content menu-content">
+                <div class="logo-img">
+                    <a href="#home"
+                        ><img
+                            src="./src/img/Logo INNKERcode.png"
+                            alt=""
+                            srcset=""
+                    /></a>
+                </div>
+
+                <nav>
+                    <ul>
+                        <li><a href="#intro">About me</a></li>
+                        <li>
+                            <a
+                                href="https://github.com/DyGomesc"
+                                target="_blank"
+                                >Projects</a
+                            >
+                        </li>
+                        <!-- <li><a href="#gallery ">Gallery</a></li>
+                        <li><a href="#work">Work</a></li> -->
+                        <li>
+                            <a
+                                href="https://www.linkedin.com/in/randygomesc/"
+                                target="_blank"
+                                >Contact</a
+                            >
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <div class="menu-spacing"></div>
+        <!-- Final Menu -->
+        <div class="container">
+            <h1>Lista de Tarefas</h1>
+            <div class="input-container">
+                <input
+                    type="text"
+                    id="taskInput"
+                    placeholder="Adicione uma nova Tarefa"
+                />
+                <button onclick="addTask()">CRIAR</button>
+            </div>
+
+            <ul id="taskList"></ul>
         </div>
 
-        <ul id="taskList"></ul>
-    </div>
-
-    <script src="./src/js/todo-app.js"></script>
-</body>
+        <script src="./src/js/todo-app.js"></script>
+    </body>
 </html>

@@ -41,6 +41,7 @@ function displayTasks() {
 
     tasks.forEach((tasks, index) => {
         const li = document.createElement("li")
+        li.classList.add("list-item")
         li.innerHTML = 
         `
         <span>${tasks.text}</span>
