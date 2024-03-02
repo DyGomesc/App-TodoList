@@ -40,7 +40,7 @@ a {
     font-size: 5rem;
 }
 .logo-img a img {
-    max-width: 15rem;
+    max-width: 10rem;
     height: auto;
     padding-top: 2rem;
 }
@@ -133,6 +133,18 @@ button:hover {
     background-color: #0056b3;
 }
 
+#contador-bar {
+    padding: 1rem;
+    border-bottom: 1px solid #ccc3c3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h3 {
+    color: #a5a1a1;
+}
+
 ul {
     list-style: none;
     padding: 0;
@@ -143,6 +155,7 @@ ul {
     justify-content: space-between;
     align-items: center;
     margin: 10px 0;
+    color: #333;
     background-color: #a5a1a1;
     border-radius: 4px;
     padding: 10px;
@@ -165,17 +178,42 @@ ul {
 }
 
 .edit-button {
-    background-color: #ffc107;
+    background-color: #333;
     color: #fff;
     border: none;
     border-radius: 4px;
-    padding: 5px 12px;
+    padding: 6px 12px;
     font-size: 14px;
     cursor: pointer;
-    margin-right: 10px;
+    margin-right: 8px;
     transition: background-color 0.3s ease;
 }
 
 .edit-button:hover {
-    background-color: #ff9800;
+    background-color: #1d2630;
+}
+
+.finish-button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-right: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.finish-button:hover {
+    background-color: #1d2630;
+}
+
+.done {
+    background-color: #686868;
+}
+
+.done span {
+    text-decoration: line-through;
+    font-style: italic;
 }
