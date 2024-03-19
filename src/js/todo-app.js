@@ -2,24 +2,13 @@ const taskInput = document.getElementById("taskInput");
 const taskList = document.getElementById("taskList");
 const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-function lerListaTarefas(){
-  let tasks = localStorage.getItem("tasks")
-
-  // essas !! validam se o valor é diferente de null e undefined
-  if(!!tasks){
-    return JSON.parse(tasks)
-  }
-
-  return []
-}
-
 function addTask() {
     const taskText = taskInput.value.trim();
     if (taskText === "") return;
 
-    const task = {        
+    const task = {
         text: taskText,
-        finish: false
+        status: "",
     };
     tasks.push(task);
 
@@ -30,8 +19,14 @@ function addTask() {
     displayTasks();
 }
 
-function deleteTask(index) {
-    tasks.splice(index, 1);
+function finishTask(index) {
+    const updateStatus = tasks[index].status;
+
+    if (updateStatus === "") {
+        tasks[index].status = "done";        
+    } else if (updateStatus === "done") {
+        tasks[index].status = "";
+    }
 
     localStorage.setItem("tasks", JSON.stringify(tasks));
 
@@ -50,39 +45,12 @@ function editTask(index) {
     }
 }
 
-// Função para alternar o valor de 'finish'
-function toggleFinish(taskId) {
-  const task = tasks.find((t) => t.id === taskId);
-  task.finish = !task.finish;
-  // Atualize o JSON no localStorage ou no servidor, conforme necessário
-  displayTasks();
-}
+function deleteTask(index) {
+    tasks.splice(index, 1);
 
-// Função para renderizar as tarefas na lista
-function renderTasks() {
-  const taskList = document.getElementById("taskList");
-  taskList.innerHTML = ""; // Limpa a lista antes de renderizar novamente
+    localStorage.setItem("tasks", JSON.stringify(tasks));
 
-  tasks.forEach((task) => {
-    const li = document.createElement("li");
-    li.textContent = task.name;
-
-    const toggleButton = document.createElement("button");
-    toggleButton.textContent = task.finish ? "Desmarcar" : "Marcar";
-    toggleButton.addEventListener("click", () => toggleFinish(task.id));
-
-    li.appendChild(toggleButton);
-    taskList.appendChild(li);
-  });
-}
-
-// Chame a função para renderizar as tarefas inicialmente
-displayTasks();
-
-
-function finishTask() {
-    const doneListItem = document.querySelector(".list-item");
-    doneListItem.classList.toggle("done");
+    displayTasks();
 }
 
 function displayTasks() {
@@ -94,7 +62,7 @@ function displayTasks() {
         li.innerHTML = `
         <span>${tasks.text}</span>
         <hr>
-        <button id="done-btn" class="finish-button" onclick="finishTask()"><i class="fa-solid fa-check"></i></i></button>
+        <button class="finish-button" onclick="finishTask(${index})"><i class="fa-solid fa-check"></i></i></button>
         <button class="edit-button" onclick="editTask(${index})"><i class="fa-solid fa-pen"></i></button>
         <button class="delete-button" onclick="deleteTask(${index})"><i class="fa-solid fa-xmark"></i></button>
         `;
@@ -103,23 +71,21 @@ function displayTasks() {
     });
 }
 
-displayTasks();
+
 
 // Contador de tarefas criadas
+const totalTasks = document.querySelector("#total-tasks");
+const doneTaks = document.querySelector("#done-tasks");
 
-const contadorTarefas = document.querySelector("#contador-tarefas");
-const contadorFinish = document.querySelector("#contador-finish");
-// Contador inicial
-contadorTarefas.textContent = taskList.children.length;
+function countAllTasks() {
+    return tasks.length;       
+}
 
-// Observador de mudanças de divs
-const observerTodoCreated = new MutationObserver(function (mutations) {
-    // Atualizar o contador sempre que houver uma mudança
-    contadorTarefas.textContent = taskList.children.length;
-});
+function countDoneTasks() {
+    return tasks.filter(task => task.status === "done").length;
+}
 
-// Configurar opções para o observador de mutação
-const configTodoCreated = { childList: true };
+totalTasks.textContent = countAllTasks();
+doneTaks.textContent = countDoneTasks();
 
-// Observar mudanças no contêiner de divs com as opções configuradas
-observerTodoCreated.observe(taskList, configTodoCreated);
+displayTasks();
